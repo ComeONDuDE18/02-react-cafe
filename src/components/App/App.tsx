@@ -3,6 +3,7 @@ import CafeInfo from '../CafeInfo/CafeInfo.tsx';
 import { useState } from 'react';
 import type { VoteType, Votes } from '../../types/votes.ts';
 import VoteOptions from '../VoteOptions/VoteOptions.tsx';
+import VoteStats from '../VoteStats/VoteStats.tsx';
 
 export default function App() {
   const [votes, setVotes] = useState<Votes>({
@@ -30,6 +31,10 @@ export default function App() {
 
   
   const totalVotes = votes.good + votes.neutral + votes.bad;
+ const positiveRate = totalVotes
+    ? Math.round((votes.good / totalVotes) * 100)
+    : 0
+
   const isReset = totalVotes !== 0;
 
   return (
@@ -39,6 +44,11 @@ export default function App() {
         onVote={handleVote}
         onReset={resetVotes}
         canReset={isReset}
+      />
+      <VoteStats
+        votes={votes}
+        totalVotes={totalVotes}
+        positiveVotes={positiveRate}
       />
     </div>
   );
