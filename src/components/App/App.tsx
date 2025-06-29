@@ -50,7 +50,7 @@ export default function App() {
         <VoteStats
           votes={votes}
           totalVotes={totalVotes}
-          positiveVotes={positiveRate}
+          positiveRate={positiveRate}
         />
       ) : (
         <Notification />
